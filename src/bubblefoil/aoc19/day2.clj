@@ -1,14 +1,6 @@
 (ns bubblefoil.aoc19.day2
-  (:require [clojure.pprint :refer [pprint]]))
-
-(defn str->int [s] (Integer/parseInt s))
-
-(defn split-by-comma [s]
-  (clojure.string/split s #","))
-
-(defn line->ints [line]
-  (map str->int
-       (split-by-comma line)))
+  (:require [bubblefoil.aoc19.input :as in]
+            [clojure.pprint :refer [pprint]]))
 
 (defn binary-fn [fn {:keys [cursor program] :as state}]
   (let [a1 (aget program (+ cursor 1))
@@ -25,7 +17,7 @@
       99 (aget program 0))))
 
 (defn read-program []
-  (int-array (line->ints (slurp "src/bubblefoil/aoc19/day2.txt"))))
+  (int-array (in/line->ints (slurp "src/bubblefoil/aoc19/day2.txt"))))
 
 (defn restore-program
   ([noun verb prog]
@@ -57,7 +49,7 @@
 
 (comment
   (def in "1,9,10,3,2,3,11,0,99,30,40,50")
-  (def prog (line->ints in))
+  (def prog (in/line->ints in))
   (def a (int-array prog))
   (restore-program a)
   (pprint a)
